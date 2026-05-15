@@ -28,7 +28,7 @@ document.write('<link rel="manifest" href="'+URL.createObjectURL(b)+'">');
   --gold:#d4900a;--goldl:#fffbea;--goldm:#f0c040;
   --teal:#0898b0;--teall:#e8f9fc;--tealm:#50c8d8;
 }
-html,body{height:100%;overflow:hidden;font-family:'Raleway',-apple-system,sans-serif;background:var(--bg);color:var(--text-inv);-webkit-font-smoothing:antialiased;letter-spacing:.01em}
+html,body{height:100%;overflow:hidden;background:#0f0c18;font-family:'Raleway',-apple-system,sans-serif;background:var(--bg);color:var(--text-inv);-webkit-font-smoothing:antialiased;letter-spacing:.01em}
 #app{display:flex;flex-direction:column;height:100vh;height:100dvh;min-height:0;overflow:hidden}
 
 /* ── HEADER ── */
@@ -69,7 +69,7 @@ html,body{height:100%;overflow:hidden;font-family:'Raleway',-apple-system,sans-s
 @keyframes fu{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 
 /* ── TABS ── */
-.tabs{position:fixed;bottom:0;left:0;right:0;padding-top:8px;padding-bottom:env(safe-area-inset-bottom,34px);background:var(--bg);border-top:.5px solid rgba(255,255,255,0.08);display:flex;align-items:flex-start;z-index:100;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.tabs{position:fixed;bottom:0;left:0;right:0;padding-top:8px;padding-bottom:env(safe-area-inset-bottom,34px);background:#0f0c18;border-top:.5px solid rgba(255,255,255,0.08);display:flex;align-items:flex-start;z-index:100}
 .tb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border:none;background:none;cursor:pointer;padding:8px 4px;transition:all .15s}
 .tb:active{opacity:.5;transform:scale(.92)}
 .tb-iw{width:28px;height:28px;display:flex;align-items:center;justify-content:center;transition:transform .2s;border-radius:10px}
@@ -303,7 +303,7 @@ a.em-n svg{stroke:var(--s2)}
 .pri-md svg{stroke:#fff}
 </style>
 </head>
-<body>
+<body style="background:#0f0c18">
 <div id="app">
   <!-- HEADER -->
   <div class="hdr">
@@ -998,5 +998,6 @@ if('serviceWorker' in navigator){
   navigator.serviceWorker.register(url).catch(()=>{});
 }
 </script>
+<div style="position:fixed;bottom:0;left:0;right:0;height:50px;background:#0f0c18;z-index:99"></div>
 </body>
 </html>
