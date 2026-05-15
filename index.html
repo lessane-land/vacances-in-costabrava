@@ -964,8 +964,42 @@ buildTransport();
 buildCL();
 updatePicker(1);
 
+
+// Measure and fix safe area bottom
+(function fixSafeArea() {
+  function apply() {
+    // Create test element to measure env(safe-area-inset-bottom)
+    const el = document.createElement('div');
+    el.style.cssText = 'position:fixed;bottom:env(safe-area-inset-bottom,0px);left:0;width:1px;height:1px;opacity:0;pointer-events:none';
+    document.body.appendChild(el);
+    const rect = el.getBoundingClientRect();
+    const fromBottom = window.innerHeight - rect.top;
+    el.remove();
+    const safe = fromBottom > 2 ? fromBottom : 34;
+    // Apply to tabs
+    const tabs = document.querySelector('.tabs');
+    if (tabs) {
+      tabs.style.paddingBottom = safe + 'px';
+    }
+    // Fill the gap below tabs
+    let fill = document.getElementById('safe-fill');
+    if (!fill) {
+      fill = document.createElement('div');
+      fill.id = 'safe-fill';
+      fill.style.cssText = 'position:fixed;left:0;right:0;background:#0f0c18;z-index:98;pointer-events:none';
+      document.body.appendChild(fill);
+    }
+    const tabsRect = document.querySelector('.tabs').getBoundingClientRect();
+    fill.style.top = tabsRect.bottom + 'px';
+    fill.style.bottom = '0';
+    fill.style.height = (window.innerHeight - tabsRect.bottom) + 'px';
+  }
+  setTimeout(apply, 100);
+  setTimeout(apply, 500);
+  window.addEventListener('resize', apply);
+})();
+
 // iOS viewport height fix
 </script>
-<div style="position:fixed;bottom:0;left:0;right:0;height:50px;background:#0f0c18;z-index:98;pointer-events:none"></div>
 </body>
 </html>
