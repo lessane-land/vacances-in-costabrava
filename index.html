@@ -987,11 +987,32 @@ updateProgress();
 // Detect standalone mode
 const isStandalone = window.navigator.standalone === true;
 if (isStandalone) {
-  // Running as installed app - hide install banner
   const ib = document.getElementById('ib');
   if (ib) ib.style.display = 'none';
+  // In standalone PWA, measure exact dimensions and set them
+  function fixLayout() {
+    const totalH = window.innerHeight;
+    const app = document.getElementById('app');
+    const tabs = document.querySelector('.tabs');
+    const hdr = document.querySelector('.hdr');
+    if (!app || !tabs || !hdr) return;
+    // Set app to exact pixel height
+    app.style.height = totalH + 'px';
+    // Get actual computed heights
+    const tabsH = tabs.getBoundingClientRect().height;
+    const hdrH = hdr.getBoundingClientRect().height;
+    // Set scroll area to fill exactly
+    const sa = document.getElementById('sa');
+    if (sa) {
+      sa.style.height = (totalH - tabsH - hdrH) + 'px';
+      sa.style.flex = 'none';
+    }
+  }
+  fixLayout();
+  setTimeout(fixLayout, 100);
+  setTimeout(fixLayout, 500);
+  window.addEventListener('resize', fixLayout);
 } else {
-  // Running in Safari browser - show install reminder prominently
   const ib = document.getElementById('ib');
   if (ib) ib.style.display = 'flex';
 }
