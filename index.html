@@ -970,5 +970,16 @@ updatePicker(1);
 
 
 </script>
+
+<div id="dbg" style="position:fixed;bottom:0;left:0;right:0;background:red;color:white;font-size:11px;padding:4px 8px;z-index:9999;font-family:monospace"></div>
+<script>
+setTimeout(function(){
+  var app = document.getElementById('app');
+  var tabs = document.querySelector('.tabs');
+  var tr = tabs.getBoundingClientRect();
+  var d = document.getElementById('dbg');
+  d.innerHTML = 'win:'+window.innerHeight+' app:'+app.offsetHeight+' tabs.bottom:'+Math.round(tr.bottom)+' gap:'+Math.round(window.innerHeight-tr.bottom);
+}, 500);
+</script>
 </body>
 </html>
