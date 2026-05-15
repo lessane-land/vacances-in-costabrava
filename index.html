@@ -984,6 +984,18 @@ updatePicker(1);
 // Load persisted progress on startup
 updateProgress();
 
+// Detect standalone mode
+const isStandalone = window.navigator.standalone === true;
+if (isStandalone) {
+  // Running as installed app - hide install banner
+  const ib = document.getElementById('ib');
+  if (ib) ib.style.display = 'none';
+} else {
+  // Running in Safari browser - show install reminder prominently
+  const ib = document.getElementById('ib');
+  if (ib) ib.style.display = 'flex';
+}
+
 // Service Worker for offline
 if('serviceWorker' in navigator){
   const sw=`const C='cv1';self.addEventListener('install',e=>e.waitUntil(caches.open(C).then(c=>c.add('/'))));self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request))));`;
